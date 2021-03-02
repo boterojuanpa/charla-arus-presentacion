@@ -1,11 +1,11 @@
 const crearCelda = require('../../../aplicacion/casos-uso/celda/crear-celda');
 
 module.exports = (gestorDeDependencias) => {
-    const { ServicioDePersistencia } = gestorDeDependencias;
+    const { ServicioDePersistencia, ServicioMensajeriaCorreoElectronico } = gestorDeDependencias;
     const { daoCeldas } = ServicioDePersistencia;
 
     const crear = (req, res, next) => {
-        const comandoCrearCelda = crearCelda(ServicioDePersistencia);
+        const comandoCrearCelda = crearCelda(ServicioDePersistencia, ServicioMensajeriaCorreoElectronico);
 
         comandoCrearCelda.ejecutar(req.body).then((respuesta) => {
             res.json(respuesta);

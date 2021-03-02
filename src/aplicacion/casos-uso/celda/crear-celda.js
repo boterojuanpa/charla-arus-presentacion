@@ -1,18 +1,18 @@
 const Celda = require('../../../dominio/celdas/modelo/celda');
-const ErrorDeNegocio = require('../../../dominio/error-de-negocio');
+const servicioValidarSiNumeroCeldaExiste = require('../../../dominio/celdas/modelo/servicio-validar-si-numero-celda-existe');
 
-module.exports = (servicioPersistencia) => {
+module.exports = (servicioPersistencia, servicioMensajeriaCorreoElectronico) => {
 
     const { repositorioCeldas } = servicioPersistencia;
 
     async function ejecutar(solicitudCrearNuevaCelda) {
 
-        if (await repositorioCeldas.existeNumeroCelda(solicitudCrearNuevaCelda.numeroCelda)) {
-            throw new ErrorDeNegocio(`Ya existe el numero de celda ${solicitudCrearNuevaCelda.numeroCelda}`);
-        }
+        await servicioValidarSiNumeroCeldaExiste(repositorioCeldas).validar(solicitudCrearNuevaCelda);
 
         const celda = new Celda(null, solicitudCrearNuevaCelda.numeroCelda, solicitudCrearNuevaCelda.tipo);
         const resultado = await repositorioCeldas.crear(celda);
+
+        await servicioMensajeriaCorreoElectronico.enviar(resultado);
 
         return resultado;
     }

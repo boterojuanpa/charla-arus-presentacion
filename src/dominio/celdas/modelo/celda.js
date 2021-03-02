@@ -1,4 +1,6 @@
+const ErrorDeNegocio = require("../../error-de-negocio");
 const { validarRequerido, validarPositivo } = require("../../validaciones-argumento");
+const { esTipoCeldaPermitido } = require("./tipo-celda");
 
 module.exports = class Celda {
     #id;
@@ -11,7 +13,12 @@ module.exports = class Celda {
 
         validarRequerido(numeroCelda, 'El numero de celda es requerido');
         validarRequerido(tipo, 'El tipo de celda es requerido')
-        validarPositivo(numeroCelda , 'El numero de celda debe ser un numero positivo' )        
+        validarPositivo(numeroCelda , 'El numero de celda debe ser un numero positivo' )    
+        
+        if(!esTipoCeldaPermitido(tipo)){
+            throw new ErrorDeNegocio(`El tipo de celda ${tipo} no está permitido en este estacionamiento`);
+        }
+        
     }
 
     get id(){
