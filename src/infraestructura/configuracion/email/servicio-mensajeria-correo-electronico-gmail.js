@@ -5,6 +5,8 @@ module.exports = class ServicioMensajeriaCorreoElectronicoGmail extends Servicio
     enviar(cuerpoCorreo) {
         console.log('Envio de correo');
         console.table(cuerpoCorreo);
+
+        throw new Error('Error conectandome con el host');
     }
 
 };

@@ -9,7 +9,7 @@ module.exports = class ServicioDePersistencia {
         return Promise.reject(new Error('no implementado'));
     }
 
-    ejecutarTransaccion() {
+    ejecutarTransaccion(transaccion) {
         return Promise.reject(new Error('no implementado'));
     }
 

@@ -7,14 +7,16 @@ module.exports = (servicioPersistencia, servicioMensajeriaCorreoElectronico) => 
 
     async function ejecutar(solicitudCrearNuevaCelda) {
 
-        await servicioValidarSiNumeroCeldaExiste(repositorioCeldas).validar(solicitudCrearNuevaCelda);
+        return servicioPersistencia.ejecutarTransaccion(async () => {
+            await servicioValidarSiNumeroCeldaExiste(repositorioCeldas).validar(solicitudCrearNuevaCelda);
 
-        const celda = new Celda(null, solicitudCrearNuevaCelda.numeroCelda, solicitudCrearNuevaCelda.tipo);
-        const resultado = await repositorioCeldas.crear(celda);
+            const celda = new Celda(null, solicitudCrearNuevaCelda.numeroCelda, solicitudCrearNuevaCelda.tipo);
+            const resultado = await repositorioCeldas.crear(celda);
 
-        await servicioMensajeriaCorreoElectronico.enviar(resultado);
+            await servicioMensajeriaCorreoElectronico.enviar(resultado);
 
-        return resultado;
+            return resultado;
+        });
     }
 
     return {
