@@ -17,7 +17,7 @@ module.exports = class RepositorioCeldasMysql extends RepositorioCeldas {
 
     async obtenerPorId(idCelda) {
         const celdaEncontrada = await this.modelo.findByPk(idCelda);
-        return new Celda(celdaEncontrada.id, celdaEncontrada.numeroCelda, celdaEncontrada.tipo);
+        return celdaEncontrada ? new Celda(celdaEncontrada.id, celdaEncontrada.numeroCelda, celdaEncontrada.tipo) : null;
     }
 
     async consultarTodas() {

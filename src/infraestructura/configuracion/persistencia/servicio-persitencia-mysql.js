@@ -2,6 +2,7 @@
 const ServicioDePersistencia = require("../../../dominio/puerto/servicio-persitencia");
 const DaoCeldasMysql = require("../../celdas/adaptador/dao-celdas-mysql");
 const RepositorioCeldasMysql = require("../../celdas/adaptador/repositorio-celdas-mysql");
+const RepositorioIngresoMysql = require("../../ingreso/adaptador/repositorio-ingreso-mysql");
 const sequelize = require("./sequelize");
 
 module.exports = class ServicioPersistenciaMysql extends ServicioDePersistencia {
@@ -9,6 +10,7 @@ module.exports = class ServicioPersistenciaMysql extends ServicioDePersistencia 
         super();
         this.sequelize = sequelize;
         this.repositorioCeldas = new RepositorioCeldasMysql(this.sequelize);
+        this.repositorioIngresos = new RepositorioIngresoMysql(this.sequelize);
         this.daoCeldas = new DaoCeldasMysql(this.sequelize);
     }
 

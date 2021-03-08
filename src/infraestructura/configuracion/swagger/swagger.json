@@ -1,122 +1,181 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "description": "Esta es la aplicación de prueba para arus",
-    "version": "1.0.0",
-    "title": "Estacionamiento Charla",
-    "contact": {
-      "email": "juan.botero@ceiba.com.co"
-    }
-  },
-  "host": "localhost:4000",
-  "basePath": "/api",
-  "tags": [
-    {
-      "name": "Celda",
-      "description": "Gestione las celdas del parqueadero"
+    "swagger": "2.0",
+    "info": {
+        "description": "Esta es la aplicación de prueba para arus",
+        "version": "1.0.0",
+        "title": "Estacionamiento Charla",
+        "contact": {
+            "email": "juan.botero@ceiba.com.co"
+        }
     },
-    {
-      "name": "Estacionamiento",
-      "description": "Gestione el acceso al parqueadero"
-    }
-  ],
-  "schemes": [
-    "http"
-  ],
-  "paths": {
-    "/celda": {
-      "post": {
-        "tags": [
-          "Celda"
-        ],
-        "summary": "Adicciona una celda al parqueadero",
-        "description": "",
-        "operationId": "agregarCelda",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Celda"
+    "host": "localhost:4000",
+    "basePath": "/api",
+    "tags": [
+        {
+            "name": "Celda",
+            "description": "Gestione las celdas del parqueadero"
+        },
+        {
+            "name": "Ingreso",
+            "description": "Gestiona el acceso al parqueadero"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/celda": {
+            "post": {
+                "tags": [
+                    "Celda"
+                ],
+                "summary": "Adicciona una celda al parqueadero",
+                "description": "",
+                "operationId": "agregarCelda",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Celda"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Celda"
+                ],
+                "summary": "Consulta las celdas del parqueadero",
+                "description": "",
+                "operationId": "obtenerTodasCeldas",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
             }
-          }
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Celda"
-        ],
-        "summary": "Consulta las celdas del parqueadero",
-        "description": "",
-        "operationId": "obtenerTodasCeldas",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "405": {
-            "description": "Invalid input"
-          }
-        }
-      }
-
-    }
-  },
-  "definitions": {
-    "Celda": {
-      "type": "object",
-      "properties": {
-        "numeroCelda": {
-          "type": "integer",
-          "format": "int64"
         },
-        "tipo": {
-          "type": "string",
-          "description": "Tipos Vehículo",
-          "enum": [
-            "bicicleta",
-            "automovil",
-            "moto",
-            "bus"
-          ]
+        "/ingreso": {
+            "post": {
+                "tags": [
+                    "Ingreso"
+                ],
+                "summary": "Realiza un ingreso al parqueadero",
+                "description": "",
+                "operationId": "ingresarVehiculo",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Ingreso"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
         }
-      },
-      "xml": {
-        "name": "Celda"
-      }
     },
-    "ApiResponse": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "integer",
-          "format": "int32"
+    "definitions": {
+        "Celda": {
+            "type": "object",
+            "properties": {
+                "numeroCelda": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "tipo": {
+                    "type": "string",
+                    "description": "Tipos Vehículo",
+                    "enum": [
+                        "bicicleta",
+                        "automovil",
+                        "moto",
+                        "bus"
+                    ]
+                }
+            },
+            "xml": {
+                "name": "Celda"
+            }
         },
-        "type": {
-          "type": "string"
+        "Ingreso": {
+            "type": "object",
+            "properties": {
+                "idCelda": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "placa": {
+                    "type": "string"
+                },
+                "fechaIngreso": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "tipoVehiculo": {
+                    "type": "string",
+                    "description": "Tipos Vehículo",
+                    "enum": [
+                        "bicicleta",
+                        "automovil",
+                        "moto",
+                        "bus"
+                    ]
+                }
+            },
+            "xml": {
+                "name": "Ingreso"
+            }
         },
-        "message": {
-          "type": "string"
+        "ApiResponse": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
         }
-      }
+    },
+    "externalDocs": {
+        "description": "Find out more about Swagger",
+        "url": "http://swagger.io"
     }
-  },
-  "externalDocs": {
-    "description": "Find out more about Swagger",
-    "url": "http://swagger.io"
-  }
 }

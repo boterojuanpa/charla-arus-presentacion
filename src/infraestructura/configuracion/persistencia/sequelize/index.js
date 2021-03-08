@@ -4,6 +4,7 @@
 const { Sequelize } = require('sequelize');
 const cls = require('cls-hooked');
 const modeloCelda = require('./modelos/modelo-celda');
+const modeloIngreso = require('./modelos/modelo-ingreso');
 
 const namespace = cls.createNamespace('namespace-sequelize');
 Sequelize.useCLS(namespace);
@@ -13,7 +14,8 @@ const sequelize = new Sequelize(process.env.DATABASE_NAME, process.env.DATABASE_
     dialect: 'mysql'
 });
 
-modeloCelda(sequelize);
+const celda = modeloCelda(sequelize);
+modeloIngreso(sequelize, celda);
 
 sequelize.sync();
 

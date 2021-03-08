@@ -8,7 +8,7 @@ module.exports = class DaoCeldasMysql extends DaoCeldas {
     }
 
     async consultarTodas() {
-        return this.sequelize.query('SELECT tipo, numeroCelda FROM celdas', { type: 'SELECT' });
+        return this.sequelize.query('SELECT id, tipo, numeroCelda FROM celdas', { type: 'SELECT' });
     }
 
 };

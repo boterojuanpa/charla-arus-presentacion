@@ -2,6 +2,7 @@ module.exports = class ServicioDePersistencia {
 
     constructor() {
         this.repositorioCeldas = null;
+        this.repositorioIngresos = null;
         this.daoCeldas = null;
     }
 
