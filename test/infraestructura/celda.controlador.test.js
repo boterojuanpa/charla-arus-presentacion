@@ -1,12 +1,15 @@
+require('dotenv').config();
+
 const app = require("../../src/app");
 const request = require('supertest');
+const { TiposCelda } = require('../../src/dominio/celdas/modelo/tipo-celda');
 
 
 describe('Pruebas de integracion para el proceso de celda', () => {
-    test('Creación correcta de una celda', (done) => {
+    test('Creacion correcta de una celda', (done) => {
         request(app)
             .post('/api/celda')
-            .send({ numeroCelda: 189, tipo: 'bicicleta' })
+            .send({ numeroCelda: 200, tipo: TiposCelda.BUS })
             .set('Accept', 'application/json')
             .expect((response) => {
                 if (!'id' in response.body) {
