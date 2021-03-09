@@ -22,3 +22,5 @@ gestorDependencias.ServicioDePersistencia.iniciarBaseDeDatos().then(() => {
 }, (err) => {
     logger.error(`la base de datos contiene errores, err:${err}`, err);
 });
+
+module.exports = app;
