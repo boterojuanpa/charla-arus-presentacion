@@ -4,7 +4,7 @@ const ServicioPersistenciaMysqlTestIntegracion = require('../persistencia/servic
 
 module.exports = (() => {
     return {
-        ServicioDePersistencia: process.env === 'test' ? new ServicioPersistenciaMysqlTestIntegracion() : new ServicioPersistenciaMysql(),
+        ServicioDePersistencia: process.env.NODE_ENV === 'test' ? new ServicioPersistenciaMysqlTestIntegracion() : new ServicioPersistenciaMysql(),
         ServicioMensajeriaCorreoElectronico: new ServicioMensajeriaCorreoElectronicoGmail()
     };
 })();

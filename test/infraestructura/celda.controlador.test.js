@@ -9,7 +9,7 @@ describe('Pruebas de integracion para el proceso de celda', () => {
     test('Creacion correcta de una celda', (done) => {
         request(app)
             .post('/api/celda')
-            .send({ numeroCelda: 200, tipo: TiposCelda.BUS })
+            .send({ numeroCelda: 250, tipo: TiposCelda.BUS })
             .set('Accept', 'application/json')
             .expect((response) => {
                 if (!'id' in response.body) {
